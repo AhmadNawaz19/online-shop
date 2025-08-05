@@ -1,25 +1,35 @@
 'use client'
-import React, { useEffect } from 'react'
-import { useSession, signIn, signOut } from "next-auth/react";
+import axios from 'axios'
+import React, { useState } from 'react'
 
 const page = () => {
 
-  const {data:session} = useSession();
+  const [user, setUser] = useState({
+    username : '',
+    age : ''
+  })
 
-  useEffect(() => {
-    console.log(session)
-  },[session])
-
-  if(session){
-    return <button onClick={() => signOut()}>logout</button>
+  const setValue = (e) => {
+    setUser(prev => ({
+      ...prev,
+      [e.target.name] : e.target.value
+    }))
   }
+
+  const checkValue = async () => {
+    console.log(user)
+    const response = await axios.post('http://localhost:8000/user', user);
+    console.log(response.data)
+  }
+
 
   return (
     <div>
-      <h1>hello</h1>
-      <button onClick={() => signIn('google', { callbackUrl: '/' })}>login WITH google</button>
-      <button onClick={() => signIn('github', { callbackUrl: '/' })}>login WITH github</button>
-
+      <form onSubmit={(e) => e.preventDefault()}>
+        <input type='text' name='username' placeholder='username' onChange={setValue}></input>
+        <input type='number' name='age' placeholder='age' onChange={setValue}></input>
+        <button type='submite' onClick={() => checkValue()}>Login</button>
+      </form>
     </div>
   )
 }
