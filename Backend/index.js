@@ -1,17 +1,27 @@
-import express  from 'express'
+import express from 'express'
+import {Server} from 'socket.io'
 const app = express();
+import http from 'http';
 
-import cors from 'cors';
-app.use(cors())
-app.use(express.json())
+const server = http.createServer(app);
 
-import { UserLogin } from './Routes/setUser.js';
-import { CheckData } from './Middleware/checkUserData.js';
+const io = new Server(server, {
+    cors : {
+        origin : 'http://localhost:3000'
+    }
+});
 
-app.get('/', (req, res) => {
+app.get('/helo', (req, res) => {
     res.send("hello")
 })
 
-app.post('/user', CheckData, UserLogin)
 
-app.listen(8000)
+io.on('connection',(socket) => {
+    socket.on('msg', (msg) => {
+        console.log(msg)
+        socket.emit('msg', msg)
+    })
+    
+})
+
+server.listen(8000);
