@@ -1,0 +1,94 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+html, body{
+    height: 100%;
+    width: 100%;
+}
+.BuyMain{
+    height: 100%;
+    width: 100%;
+    /* background-color: antiquewhite; */
+}
+.homeBtn{
+    background-color: white;
+    width: 60px;
+    height: 30px;
+    color: black;
+    border-radius: 10px;
+    align-self: flex-end;
+}
+.prodcutDetail{
+    height: 95%;
+    width: 100%;
+    /* background-color: aquamarine; */
+}
+.item{
+    height: 40%;
+    width: 100%;
+    background-color: rgb(44, 38, 37);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.productImg{
+    height: 100%;
+    width: 30%;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+.buyImg{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.title{
+    margin-top: 70px;
+}
+.price{
+    margin-top: 70px;
+    text-decoration: underline red 5px;
+}
+.description{
+    height: 30%;
+    width: 100%;
+    /* background-color: cadetblue; */
+}
+.amount{
+    height: 30%;
+    width: 100%;
+    /* background-color: darkgray; */
+    display: flex;
+}
+.totalAmount{
+    height: 100%;
+    width: 50%;
+    /* background-color: cyan; */
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+.conform{
+    height: 100%;
+    width: 50%;
+    /* background-color: deeppink; */
+}
+input{
+    width: 50%;
+    height: 30px;
+    margin: 5px 30px;
+    text-align: center;
+}
+.buyBtn{
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.addToCart{
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}

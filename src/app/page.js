@@ -1,48 +1,32 @@
-"use client";
+// this is home page of product.
 
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import axios from "axios";
+import Cart from "../../component/OpenCartPage";
+import "./page.css";
+import TargetProduct from "../../component/TargetProduct";
 
-const socket = io("http://localhost:8000");
-
-export default function Page() {
-  const [sendMsg, setSendMsg] = useState("");
-  const [receiveMsg, setReceiveMsg] = useState([]);
-
-
-  const send = () => {
-    socket.emit("msg", sendMsg);
-    setSendMsg("");
-  };
-
-  useEffect(() => {
-    socket.on("msg", (msg) => {
-      setReceiveMsg((prev) => [...prev, msg].reverse());
-    });
-    return () => {
-      socket.off("msg");
-    };
-  }, []);
+export default async function Page() {
+  //  here we call third party api for to fetch products.
+  let response = await axios.get("https://fakestoreapi.com/products");
+  response = response.data;
 
   return (
-    <div>
-      <h1>Chat app</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          placeholder="messege"
-          value={sendMsg}
-          onChange={(e) => setSendMsg(e.target.value)}
-        ></input>
-        <button type="submite" onClick={() => send()}>
-          Send
-        </button>
-      </form>
-      <h2>Messeges</h2>
-      {receiveMsg.map((msg, idx) => {
+    <div className="main">
+      <h1>Page..</h1>
+      <Cart />
+      {response.map((item) => {
         return (
-          <div key={idx}>
-            <h3>{msg}</h3>
+          <div className="product" key={item.id}>
+            <div className="img">
+              <img src={item.image}></img>
+            </div>
+            <div className="title">
+              <h3>{item.title}</h3>
+              <a className="buyBtn" href={`/BuyPage/${item.id}`}>
+                Buy Now
+              </a>
+              <TargetProduct id={item.id} />
+            </div>
           </div>
         );
       })}

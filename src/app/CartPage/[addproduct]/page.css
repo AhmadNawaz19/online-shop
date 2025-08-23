@@ -1,0 +1,35 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+    width: 100%;
+}
+.CartPage{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+.Product{
+    height: 20%;
+    width: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.Img{
+    height: 100px;
+    width: 100px;
+}
+.cartImg{
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}

@@ -1,27 +1,21 @@
-import express from 'express'
-import {Server} from 'socket.io'
+import express from 'express';
 const app = express();
-import http from 'http';
 
-const server = http.createServer(app);
+import cors from 'cors';
+app.use(cors());
 
-const io = new Server(server, {
-    cors : {
-        origin : 'http://localhost:3000'
-    }
-});
+app.use(express.json());
 
-app.get('/helo', (req, res) => {
-    res.send("hello")
+import { addItem } from './router/AddItemToModel.js';
+import { Getproduct } from './router/getProduct.js';
+import { RemoveProduct } from './router/RemoveProduct.js';
+
+app.post('/addItem', addItem )
+app.get('/getProduct', Getproduct)
+app.post('/RemovePro', RemoveProduct)
+
+app.get('/', (req, res) => {
+    res.send('hello')
 })
 
-
-io.on('connection',(socket) => {
-    socket.on('msg', (msg) => {
-        console.log(msg)
-        socket.emit('msg', msg)
-    })
-    
-})
-
-server.listen(8000);
+app.listen(8000);
