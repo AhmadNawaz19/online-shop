@@ -15,7 +15,7 @@ html, body{
 }
 .cart{
     align-self: flex-end;
-    padding: 20px;
+    padding: 10px;
 }
 .product{
     height: 50%;

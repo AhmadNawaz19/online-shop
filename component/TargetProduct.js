@@ -14,6 +14,8 @@ export default function TargetProduct ({id}) {
         picture : '',
         price : ''
     })
+    const [cond, setCond] = useState(false)
+    const [recive, setRecive] = useState('')
 
     // this targetPro function used for to pick a product which we want to add in to cart.
 
@@ -35,7 +37,14 @@ export default function TargetProduct ({id}) {
             const sendData = async () => {
             try {
                 let response = await axios.post('http://localhost:8000/addItem', item);
-               
+                if(response.data.response === 'ok' || response.data.response === 'error'){
+                    setCond(true)
+                    setRecive(response.data.msg)
+                    setTimeout(() => {
+                        setCond(false)
+                        setRecive('')
+                    }, 2000);
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -48,6 +57,13 @@ export default function TargetProduct ({id}) {
     return (
         <div>
         <button className='addToCart' onClick={() => targetPro(id)}>Add to cart</button>
+        {
+            cond ? (
+                <div className='result'>
+                    <h3>{recive}</h3>
+                </div>
+            ): null
+        }
         </div>
     )
 }
